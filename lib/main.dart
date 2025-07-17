@@ -1,3 +1,4 @@
+import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,9 @@ class EventlyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {HomeScreen.routeName: (_) => HomeScreen()},
       initialRoute: HomeScreen.routeName,
+      theme: AppTheme.lightMode,
+      darkTheme: AppTheme.darkMode,
+      themeMode: ThemeMode.light,
     );
   }
 }
