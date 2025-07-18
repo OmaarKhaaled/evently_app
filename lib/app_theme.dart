@@ -10,6 +10,7 @@ class AppTheme {
   static const Color grey = Color(0xFF7B7B7B);
 
   static ThemeData lightMode = ThemeData(
+    scaffoldBackgroundColor: backGroundLight,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary,
       type: BottomNavigationBarType.fixed,
@@ -20,6 +21,59 @@ class AppTheme {
       backgroundColor: primary,
       foregroundColor: white,
       shape: CircleBorder(side: BorderSide(color: white, width: 5)),
+    ),
+
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(
+        color: grey,
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: grey),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: grey),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    ),
+    textTheme: TextTheme(
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: white,
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16,
+        color: black,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primary,
+        textStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
     ),
   );
 
