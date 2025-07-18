@@ -1,0 +1,77 @@
+import 'package:evently_app/app_theme.dart';
+import 'package:evently_app/models/category_Model.dart';
+import 'package:evently_app/tabs/home/tab_item.dart';
+import 'package:flutter/material.dart';
+
+class HomeHeader extends StatefulWidget {
+  @override
+  State<HomeHeader> createState() => _HomeHeaderState();
+}
+
+class _HomeHeaderState extends State<HomeHeader> {
+  int currentIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      padding: EdgeInsets.only(left: 16, bottom: 16),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppTheme.primary,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(24),
+          bottomRight: Radius.circular(24),
+        ),
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Welcome Back', style: textTheme.titleSmall),
+            Text('Omar Khaled', style: textTheme.headlineSmall),
+            SizedBox(height: 16),
+            DefaultTabController(
+              length: CategoryModel.categories.length + 1,
+              child: TabBar(
+                isScrollable: true,
+                dividerColor: Colors.transparent,
+                indicatorColor: Colors.transparent,
+                tabAlignment: TabAlignment.start,
+                labelPadding: EdgeInsets.only(right: 10),
+                onTap: (index) {
+                  if (currentIndex == index) return;
+                  currentIndex = index;
+                  setState(() {});
+                },
+                tabs: [
+                  TabItem(
+                    icon: Icons.ac_unit_outlined,
+                    label: 'All',
+                    isSelected: currentIndex == 0,
+                    selectedForeGroundColor: AppTheme.primary,
+                    unselectedForeGroundColor: AppTheme.white,
+                    selectedBackGroundColor: AppTheme.white,
+                  ),
+                  ...CategoryModel.categories.map(
+                    (category) => TabItem(
+                      icon: category.icon,
+                      label: category.name,
+                      isSelected:
+                          currentIndex ==
+                          CategoryModel.categories.indexOf(category) + 1,
+                      selectedForeGroundColor: AppTheme.primary,
+                      unselectedForeGroundColor: AppTheme.white,
+                      selectedBackGroundColor: AppTheme.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    ;
+  }
+}
