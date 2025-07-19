@@ -60,13 +60,18 @@ class AppTheme {
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
-        color: white
+        color: white,
       ),
       titleSmall: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
-        color: white
-      )
+        color: white,
+      ),
+      headlineLarge: TextStyle(
+        fontSize: 36,
+        color: primary,
+        fontWeight: FontWeight.bold,
+      ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -83,6 +88,13 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        iconSize: 33,
+        foregroundColor: primary,
+        shape: CircleBorder(side: BorderSide(color: primary)),
       ),
     ),
   );

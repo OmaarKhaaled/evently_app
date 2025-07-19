@@ -16,7 +16,6 @@ class _HomeHeaderState extends State<HomeHeader> {
 
     return Container(
       padding: EdgeInsets.only(left: 16, bottom: 16),
-      width: double.infinity,
       decoration: BoxDecoration(
         color: AppTheme.primary,
         borderRadius: BorderRadius.only(
@@ -72,6 +71,5 @@ class _HomeHeaderState extends State<HomeHeader> {
         ),
       ),
     );
-    ;
   }
 }

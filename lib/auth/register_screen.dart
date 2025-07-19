@@ -1,4 +1,3 @@
-import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/login_screen.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
