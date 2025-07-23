@@ -4,6 +4,7 @@ import 'package:evently_app/tabs/home/home_tab.dart';
 import 'package:evently_app/tabs/love/love_tab.dart';
 import 'package:evently_app/tabs/map/map_tab.dart';
 import 'package:evently_app/tabs/profile/profile_tab.dart';
+import 'package:evently_app/widget/create_event.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -62,7 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(CreateEvent.routeName);
+        },
         child: Icon(Icons.add, size: 36),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

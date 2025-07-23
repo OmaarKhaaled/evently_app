@@ -11,6 +11,16 @@ class AppTheme {
 
   static ThemeData lightMode = ThemeData(
     scaffoldBackgroundColor: backGroundLight,
+    appBarTheme: AppBarTheme(
+      backgroundColor: backGroundLight,
+      centerTitle: true,
+      foregroundColor: primary,
+      titleTextStyle: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: primary,
+      ),
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary,
       type: BottomNavigationBarType.fixed,

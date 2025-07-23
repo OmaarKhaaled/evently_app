@@ -3,6 +3,7 @@ import 'package:evently_app/auth/login_screen.dart';
 import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/onboarding_screen.dart';
+import 'package:evently_app/widget/create_event.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,7 +18,7 @@ class EventlyApp extends StatelessWidget {
       future: hasSeenOnBoarding(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return MaterialApp(home: OnboardingScreen(),);
+          return MaterialApp(home: OnboardingScreen());
         }
         if (!snapshot.hasData) {
           return MaterialApp(
@@ -32,6 +33,7 @@ class EventlyApp extends StatelessWidget {
             RegisterScreen.routeName: (_) => RegisterScreen(),
             HomeScreen.routeName: (_) => HomeScreen(),
             OnboardingScreen.routeName: (_) => OnboardingScreen(),
+            CreateEvent.routeName: (_) => CreateEvent(),
           },
           home: snapshot.hasData == true ? HomeScreen() : OnboardingScreen(),
           theme: AppTheme.lightMode,
