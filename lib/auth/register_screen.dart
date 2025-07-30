@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import 'package:evently_app/app_theme.dart';
+=======
+>>>>>>> development
 import 'package:evently_app/auth/login_screen.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
@@ -43,7 +46,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             SizedBox(height: 16),
             DefaultTextFormField(
+<<<<<<< HEAD
               hintText: 'pasword',
+=======
+              hintText: 'password',
+>>>>>>> development
               controller: passwordController,
               preFixIconImageName: 'password',
             ),

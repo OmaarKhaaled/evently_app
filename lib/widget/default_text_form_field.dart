@@ -6,12 +6,20 @@ class DefaultTextFormField extends StatelessWidget {
   TextEditingController? controller;
   void Function(String)? onChanged;
   String? preFixIconImageName;
+<<<<<<< HEAD
+=======
+  String? Function(String?)? validator ;
+>>>>>>> development
 
   DefaultTextFormField({
     required this.hintText,
     this.controller,
     this.onChanged,
     this.preFixIconImageName,
+<<<<<<< HEAD
+=======
+    this.validator
+>>>>>>> development
   });
   @override
   Widget build(BuildContext context) {
@@ -27,6 +35,10 @@ class DefaultTextFormField extends StatelessWidget {
                 fit: BoxFit.scaleDown,
               ),
       ),
+<<<<<<< HEAD
+=======
+      validator: validator,
+>>>>>>> development
     );
   }
 }

@@ -11,6 +11,19 @@ class AppTheme {
 
   static ThemeData lightMode = ThemeData(
     scaffoldBackgroundColor: backGroundLight,
+<<<<<<< HEAD
+=======
+    appBarTheme: AppBarTheme(
+      backgroundColor: backGroundLight,
+      centerTitle: true,
+      foregroundColor: primary,
+      titleTextStyle: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+        color: primary,
+      ),
+    ),
+>>>>>>> development
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary,
       type: BottomNavigationBarType.fixed,
@@ -30,11 +43,19 @@ class AppTheme {
         fontSize: 16,
       ),
       enabledBorder: OutlineInputBorder(
+<<<<<<< HEAD
         borderSide: BorderSide(color: grey),
         borderRadius: BorderRadius.circular(16),
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: grey),
+=======
+        borderSide: BorderSide(color: primary),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: primary),
+>>>>>>> development
         borderRadius: BorderRadius.circular(16),
       ),
       errorBorder: OutlineInputBorder(
@@ -57,6 +78,24 @@ class AppTheme {
         color: black,
         fontWeight: FontWeight.w500,
       ),
+<<<<<<< HEAD
+=======
+      headlineSmall: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: white,
+      ),
+      titleSmall: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: white,
+      ),
+      headlineLarge: TextStyle(
+        fontSize: 36,
+        color: primary,
+        fontWeight: FontWeight.bold,
+      ),
+>>>>>>> development
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -75,6 +114,16 @@ class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),
+<<<<<<< HEAD
+=======
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        iconSize: 33,
+        foregroundColor: primary,
+        shape: CircleBorder(side: BorderSide(color: primary)),
+      ),
+    ),
+>>>>>>> development
   );
 
   static ThemeData darkMode = ThemeData();
