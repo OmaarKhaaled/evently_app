@@ -1,9 +1,11 @@
 import 'package:evently_app/app_theme.dart';
+import 'package:evently_app/models/event_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EventItem extends StatelessWidget {
-  const EventItem({super.key});
-
+  EventModel event;
+  EventItem({required this.event});
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.sizeOf(context);
@@ -15,7 +17,7 @@ class EventItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: Image.asset(
-              'assets/images/meeting.png',
+              'assets/images/${event.category.imageName}.png',
               height: screenSize.height * .23,
               width: double.infinity,
               fit: BoxFit.fill,
@@ -31,14 +33,14 @@ class EventItem extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  '21',
+                  '${event.dateTime.day}',
                   style: textTheme.titleLarge!.copyWith(
                     color: AppTheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'NOV',
+                  DateFormat('MMM').format(event.dateTime),
                   style: textTheme.titleSmall!.copyWith(
                     color: AppTheme.primary,
                     fontWeight: FontWeight.bold,
@@ -65,7 +67,7 @@ class EventItem extends StatelessWidget {
                       child: Text(
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        'Meeting for Updating The Development Method',
+                        event.title,
                         style: textTheme.titleSmall!.copyWith(
                           color: AppTheme.black,
                         ),
