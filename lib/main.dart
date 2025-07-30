@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
-WidgetsFlutterBinding.ensureInitialized();
+WidgetsFlutterBinding.ensureInitialized(); 
 await Firebase.initializeApp();
   runApp(EventlyApp());
 }
@@ -23,12 +23,12 @@ class EventlyApp extends StatelessWidget {
         if (snapshot.hasError) {
           return MaterialApp(home: OnboardingScreen());
         }
-        if (!snapshot.hasData) {
-          return MaterialApp(
-            home: Scaffold(body: Center(child: CircularProgressIndicator())),
-            debugShowCheckedModeBanner: false,
-          );
-        }
+        // if (!snapshot.hasData) {
+        //   return MaterialApp(
+        //     home: Scaffold(body: Center(child: CircularProgressIndicator())),
+        //     debugShowCheckedModeBanner: false,
+        //   );
+        // }
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           routes: {
