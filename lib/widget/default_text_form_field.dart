@@ -1,35 +1,64 @@
+import 'package:evently_app/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class DefaultTextFormField extends StatelessWidget {
+class DefaultTextFormField extends StatefulWidget {
   String hintText;
   TextEditingController? controller;
   void Function(String)? onChanged;
   String? preFixIconImageName;
-  String? Function(String?)? validator ;
+  String? Function(String?)? validator;
+  bool isPassword;
 
   DefaultTextFormField({
     required this.hintText,
     this.controller,
     this.onChanged,
     this.preFixIconImageName,
-    this.validator
+    this.validator,
+    this.isPassword = false,
   });
+
+  @override
+  State<DefaultTextFormField> createState() => _DefaultTextFormFieldState();
+}
+
+class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
+  late bool isObscure = widget.isPassword;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      onChanged: onChanged,
+      controller: widget.controller,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: preFixIconImageName == null
+        hintText: widget.hintText,
+        prefixIcon: widget.preFixIconImageName == null
             ? null
             : SvgPicture.asset(
-                'assets/icons/$preFixIconImageName.svg',
+                'assets/icons/${widget.preFixIconImageName}.svg',
                 fit: BoxFit.scaleDown,
               ),
+        suffixIcon: widget.isPassword
+            ? InkWell(
+                onTap: () {
+                  isObscure = !isObscure;
+                  setState(() {});
+                },
+
+                child: Icon(
+                  isObscure
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
+                  color: AppTheme.grey,
+                ),
+              )
+            : null,
       ),
-      validator: validator,
+      obscureText: isObscure,
+      validator: widget.validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      onTapOutside: (_) => FocusManager.instance.primaryFocus!.unfocus(),
     );
   }
 }

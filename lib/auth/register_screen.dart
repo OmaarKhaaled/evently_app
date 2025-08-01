@@ -17,6 +17,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,62 +25,89 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/Logo.png',
-              height: MediaQuery.sizeOf(context).height * .2,
-              fit: BoxFit.fill,
-            ),
-            SizedBox(height: 24),
-            DefaultTextFormField(
-              hintText: 'Name',
-              controller: nameController,
-              preFixIconImageName: 'person',
-            ),
-            SizedBox(height: 24),
-            DefaultTextFormField(
-              hintText: 'Email',
-              controller: emailController,
-              preFixIconImageName: 'email',
-            ),
-            SizedBox(height: 16),
-            DefaultTextFormField(
-              hintText: 'password',
-              controller: passwordController,
-              preFixIconImageName: 'password',
-            ),
-            SizedBox(height: 24),
-            DefaultElevatedButton(label: 'Create Account', onPressed: register,),
-            SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Already have account?', style: textTheme.titleMedium),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(
-                      context,
-                    ).pushReplacementNamed(LoginScreen.routeName);
-                  },
-                  child: Text('Login'),
-                ),
-              ],
-            ),
-          ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/Logo.png',
+                height: MediaQuery.sizeOf(context).height * .2,
+                fit: BoxFit.fill,
+              ),
+              SizedBox(height: 24),
+              DefaultTextFormField(
+                hintText: 'Name',
+                controller: nameController,
+                preFixIconImageName: 'person',
+                validator: (value) {
+                  if (value == null || value.length < 3) {
+                    return 'Invalid name';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 24),
+              DefaultTextFormField(
+                hintText: 'Email',
+                controller: emailController,
+                preFixIconImageName: 'email',
+                validator: (value) {
+                  if (value == null || value.length < 5) {
+                    return 'Invalid Email';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16),
+              DefaultTextFormField(
+                hintText: 'password',
+                controller: passwordController,
+                preFixIconImageName: 'password',
+                validator: (value) {
+                  if (value == null || value.length < 8) {
+                    return 'password must be at least 8 chars';
+                  }
+                  return null;
+                },
+                isPassword: true,
+              ),
+              SizedBox(height: 24),
+              DefaultElevatedButton(
+                label: 'Create Account',
+                onPressed: register,
+              ),
+              SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Already have account?', style: textTheme.titleMedium),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(LoginScreen.routeName);
+                    },
+                    child: Text('Login'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   void register() {
-    FirebaseService.register(
-      name: nameController.text,
-      email: emailController.text,
-      password: passwordController.text,
-    ).then(
-      (user) => Navigator.pushReplacementNamed(context, HomeScreen.routeName),
-    );
+    if (formKey.currentState!.validate()) {
+      FirebaseService.register(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      ).then(
+        (user) => Navigator.pushReplacementNamed(context, HomeScreen.routeName),
+      );
+    }
   }
 }
