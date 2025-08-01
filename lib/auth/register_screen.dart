@@ -3,6 +3,7 @@ import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
 import 'package:evently_app/widget/firebase_service.dart';
+import 'package:evently_app/widget/ui_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
@@ -102,12 +104,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void register() {
     if (formKey.currentState!.validate()) {
       FirebaseService.register(
-        name: nameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-      ).then(
-        (user) => Navigator.pushReplacementNamed(context, HomeScreen.routeName),
-      );
+            name: nameController.text,
+            email: emailController.text,
+            password: passwordController.text,
+          )
+          .then(
+            (user) =>
+                Navigator.pushReplacementNamed(context, HomeScreen.routeName),
+          )
+          .catchError((error) {
+            String? errorMessage;
+            if (error is FirebaseAuthException) {
+              errorMessage = error.message;
+            }
+            UiUtils.showFaliareMessage(errorMessage);
+          });
+      ;
     }
   }
 }
