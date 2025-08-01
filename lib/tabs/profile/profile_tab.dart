@@ -1,5 +1,9 @@
 import 'package:evently_app/app_theme.dart';
+import 'package:evently_app/auth/login_screen.dart';
+import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/tabs/profile/profile_header.dart';
+import 'package:evently_app/widget/firebase_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTab extends StatelessWidget {
@@ -16,67 +20,95 @@ class ProfileTab extends StatelessWidget {
       children: [
         ProfileHeader(),
         SizedBox(height: 24),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Language',
-                style: textTheme.titleLarge!.copyWith(
-                  color: AppTheme.black,
-                  fontWeight: FontWeight.bold,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Language',
+                  style: textTheme.titleLarge!.copyWith(
+                    color: AppTheme.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(height: 16),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppTheme.primary),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: DropdownButton(
-                  value: 'en',
-                  items: languages
-                      .map(
-                        (language) => DropdownMenuItem(
-                          value: language.code,
-                          child: Text(
-                            language.name,
-                            style: textTheme.titleLarge!.copyWith(
-                              color: AppTheme.primary,
-                              fontWeight: FontWeight.bold,
+                SizedBox(height: 16),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppTheme.primary),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: DropdownButton(
+                    value: 'en',
+                    items: languages
+                        .map(
+                          (language) => DropdownMenuItem(
+                            value: language.code,
+                            child: Text(
+                              language.name,
+                              style: textTheme.titleLarge!.copyWith(
+                                color: AppTheme.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) {},
-                  borderRadius: BorderRadius.circular(16),
-                  underline: SizedBox(),
-                  iconEnabledColor: AppTheme.primary,
-                  isExpanded: true,
+                        )
+                        .toList(),
+                    onChanged: (value) {},
+                    borderRadius: BorderRadius.circular(16),
+                    underline: SizedBox(),
+                    iconEnabledColor: AppTheme.primary,
+                    isExpanded: true,
+                  ),
                 ),
-              ),
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Dark Theme',
-                    style: textTheme.titleLarge!.copyWith(
-                      color: AppTheme.black,
-                      fontWeight: FontWeight.bold,
+                SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Dark Theme',
+                      style: textTheme.titleLarge!.copyWith(
+                        color: AppTheme.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Switch(
+                      value: true,
+                      onChanged: (value) {},
+                      activeTrackColor: AppTheme.primary,
+                    ),
+                  ],
+                ),
+                Spacer(),
+                InkWell(
+                  onTap: () {
+                    FirebaseService.logOut().then((_) {
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(LoginScreen.routeName);
+                    });
+                  },
+
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 30),
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppTheme.red,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout, size: 24, color: AppTheme.white),
+                        SizedBox(width: 8),
+                        Text('Logout', style: textTheme.titleLarge),
+                      ],
                     ),
                   ),
-                  Switch(
-                    value: true,
-                    onChanged: (value) {},
-                    activeTrackColor: AppTheme.primary,
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ],

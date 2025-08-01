@@ -16,7 +16,7 @@ class EventModel {
     required this.description,
   });
 
-  EventModel.fromJeson(Map<String, dynamic> json)
+  EventModel.fromJson(Map<String, dynamic> json)
     : this(
         id: json['id'],
         title: json['title'],
@@ -27,7 +27,7 @@ class EventModel {
         description: json['description'],
       );
 
-  Map<String, dynamic> toJeson() => {
+  Map<String, dynamic> toJson() => {
     'id': id,
     'title': title,
     'description': description,

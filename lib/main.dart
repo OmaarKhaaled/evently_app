@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
-WidgetsFlutterBinding.ensureInitialized(); 
-await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(EventlyApp());
 }
 
@@ -23,9 +23,7 @@ class EventlyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            ),
+            home: Scaffold(body: Center(child: CircularProgressIndicator())),
           );
         } else if (snapshot.hasError) {
           return MaterialApp(
@@ -46,7 +44,7 @@ class EventlyApp extends StatelessWidget {
             theme: AppTheme.lightMode,
             darkTheme: AppTheme.darkMode,
             themeMode: ThemeMode.light,
-            home: seenOnboarding ? HomeScreen() : OnboardingScreen(),
+            home: seenOnboarding ? LoginScreen() : OnboardingScreen(),
           );
         }
       },

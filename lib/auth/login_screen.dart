@@ -1,6 +1,8 @@
 import 'package:evently_app/auth/register_screen.dart';
+import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
+import 'package:evently_app/widget/firebase_service.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -40,12 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
               preFixIconImageName: 'password',
             ),
             SizedBox(height: 24),
-            DefaultElevatedButton(label: 'Login', onPressed: () {}),
+            DefaultElevatedButton(label: 'Login', onPressed: login),
             SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('don\'t Have An Account ?',style: textTheme.titleMedium),
+                Text('don\'t Have An Account ?', style: textTheme.titleMedium),
                 TextButton(
                   onPressed: () {
                     Navigator.of(
@@ -59,6 +61,16 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void login() {
+    FirebaseService.login(
+      email: emailController.text,
+      password: passwordController.text,
+    ).then(
+      (user) =>
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName),
     );
   }
 }

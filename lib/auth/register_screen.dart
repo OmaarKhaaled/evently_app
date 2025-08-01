@@ -1,6 +1,9 @@
 import 'package:evently_app/auth/login_screen.dart';
+import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
+import 'package:evently_app/widget/firebase_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -32,7 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(height: 24),
             DefaultTextFormField(
               hintText: 'Name',
-              controller: nameController, 
+              controller: nameController,
               preFixIconImageName: 'person',
             ),
             SizedBox(height: 24),
@@ -48,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               preFixIconImageName: 'password',
             ),
             SizedBox(height: 24),
-            DefaultElevatedButton(label: 'Create Account', onPressed: () {}),
+            DefaultElevatedButton(label: 'Create Account', onPressed: register,),
             SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -56,8 +59,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Text('Already have account?', style: textTheme.titleMedium),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(LoginScreen.routeName);
+                    Navigator.of(
+                      context,
+                    ).pushReplacementNamed(LoginScreen.routeName);
                   },
                   child: Text('Login'),
                 ),
@@ -66,6 +70,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void register() {
+    FirebaseService.register(
+      name: nameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+    ).then(
+      (user) => Navigator.pushReplacementNamed(context, HomeScreen.routeName),
     );
   }
 }
