@@ -2,11 +2,27 @@ class UserModel {
   String id;
   String name;
   String email;
+  List<String> favoriteEventsIds;
 
-  UserModel({required this.id, required this.name, required this.email});
+  UserModel({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.favoriteEventsIds,
+  });
 
   UserModel.fromJson(Map<String, dynamic> json)
-    : this(id: json['id'], email: json['email'], name: json['name']);
+    : this(
+        id: json['id'],
+        email: json['email'],
+        name: json['name'],
+        favoriteEventsIds: (json['favoriteEventsIds'] as List).cast<String>(),
+      );
 
-  Map<String, dynamic> toJson() => {'id': id, 'name': name, 'email': email};
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'email': email,
+    'favoriteEventsIds': favoriteEventsIds,
+  };
 }
