@@ -1,5 +1,7 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/models/event_model.dart';
+import 'package:evently_app/widget/firebase_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/models/user_model.dart';
@@ -45,6 +47,7 @@ class FirebaseService {
     UserCredential credential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
     UserModel user = UserModel(
+      favoriteEventsIds: [],
       id: credential.user!.uid,
       name: name,
       email: email,
@@ -68,4 +71,24 @@ class FirebaseService {
   }
 
   static Future<void> logOut() => FirebaseAuth.instance.signOut();
+
+  static Future<void> addEventToFavorites(String eventId) async {
+    CollectionReference<UserModel> userCollection = getUserCollection();
+    DocumentReference<UserModel> userDoc = userCollection.doc(
+      FirebaseAuth.instance.currentUser!.uid,
+    );
+   return userDoc.update({
+      'favoriteEventsIds': FieldValue.arrayUnion([eventId]),
+    });
+  }
+
+    static Future<void> removeEventToFavorites(String eventId) async {
+    CollectionReference<UserModel> userCollection = getUserCollection();
+    DocumentReference<UserModel> userDoc = userCollection.doc(
+      FirebaseAuth.instance.currentUser!.uid,
+    );
+   return userDoc.update({
+      'favoriteEventsIds': FieldValue.arrayRemove([eventId]),
+    });
+  }
 }
