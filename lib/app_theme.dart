@@ -11,8 +11,6 @@ class AppTheme {
 
   static ThemeData lightMode = ThemeData(
     scaffoldBackgroundColor: backGroundLight,
-<<<<<<< HEAD
-=======
     appBarTheme: AppBarTheme(
       backgroundColor: backGroundLight,
       centerTitle: true,
@@ -23,7 +21,6 @@ class AppTheme {
         color: primary,
       ),
     ),
->>>>>>> development
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: primary,
       type: BottomNavigationBarType.fixed,
@@ -35,7 +32,6 @@ class AppTheme {
       foregroundColor: white,
       shape: CircleBorder(side: BorderSide(color: white, width: 5)),
     ),
-
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyle(
         color: grey,
@@ -43,19 +39,11 @@ class AppTheme {
         fontSize: 16,
       ),
       enabledBorder: OutlineInputBorder(
-<<<<<<< HEAD
         borderSide: BorderSide(color: grey),
         borderRadius: BorderRadius.circular(16),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: grey),
-=======
         borderSide: BorderSide(color: primary),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: primary),
->>>>>>> development
         borderRadius: BorderRadius.circular(16),
       ),
       errorBorder: OutlineInputBorder(
@@ -78,8 +66,6 @@ class AppTheme {
         color: black,
         fontWeight: FontWeight.w500,
       ),
-<<<<<<< HEAD
-=======
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
@@ -95,7 +81,6 @@ class AppTheme {
         color: primary,
         fontWeight: FontWeight.bold,
       ),
->>>>>>> development
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -114,8 +99,6 @@ class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),
-<<<<<<< HEAD
-=======
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         iconSize: 33,
@@ -123,7 +106,6 @@ class AppTheme {
         shape: CircleBorder(side: BorderSide(color: primary)),
       ),
     ),
->>>>>>> development
   );
 
   static ThemeData darkMode = ThemeData();

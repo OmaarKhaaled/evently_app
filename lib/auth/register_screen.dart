@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import 'package:evently_app/app_theme.dart';
-=======
->>>>>>> development
 import 'package:evently_app/auth/login_screen.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
@@ -15,8 +11,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -34,11 +32,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(height: 24),
             DefaultTextFormField(
               hintText: 'Name',
-              controller: emailController,
+              controller: nameController, 
               preFixIconImageName: 'person',
             ),
             SizedBox(height: 24),
-
             DefaultTextFormField(
               hintText: 'Email',
               controller: emailController,
@@ -46,11 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             SizedBox(height: 16),
             DefaultTextFormField(
-<<<<<<< HEAD
-              hintText: 'pasword',
-=======
               hintText: 'password',
->>>>>>> development
               controller: passwordController,
               preFixIconImageName: 'password',
             ),
@@ -63,9 +56,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Text('Already have account?', style: textTheme.titleMedium),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(
-                      context,
-                    ).pushReplacementNamed(LoginScreen.routeName);
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routeName);
                   },
                   child: Text('Login'),
                 ),

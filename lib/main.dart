@@ -17,47 +17,39 @@ await Firebase.initializeApp();
 class EventlyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        LoginScreen.routeName: (_) => LoginScreen(),
-        RegisterScreen.routeName: (_) => RegisterScreen(),
-        HomeScreen.routeName: (_) => HomeScreen(),
-      },
-      initialRoute: RegisterScreen.routeName,
-      theme: AppTheme.lightMode,
-      darkTheme: AppTheme.darkMode,
-      themeMode: ThemeMode.light,
-=======
-    return FutureBuilder(
+    return FutureBuilder<bool>(
       future: hasSeenOnBoarding(),
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return MaterialApp(home: OnboardingScreen());
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: OnboardingScreen(),
+          );
+        } else {
+          final bool seenOnboarding = snapshot.data ?? false;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            routes: {
+              LoginScreen.routeName: (_) => LoginScreen(),
+              RegisterScreen.routeName: (_) => RegisterScreen(),
+              HomeScreen.routeName: (_) => HomeScreen(),
+              OnboardingScreen.routeName: (_) => OnboardingScreen(),
+              CreateEvent.routeName: (_) => CreateEvent(),
+            },
+            theme: AppTheme.lightMode,
+            darkTheme: AppTheme.darkMode,
+            themeMode: ThemeMode.light,
+            home: seenOnboarding ? HomeScreen() : OnboardingScreen(),
+          );
         }
-        // if (!snapshot.hasData) {
-        //   return MaterialApp(
-        //     home: Scaffold(body: Center(child: CircularProgressIndicator())),
-        //     debugShowCheckedModeBanner: false,
-        //   );
-        // }
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          routes: {
-            LoginScreen.routeName: (_) => LoginScreen(),
-            RegisterScreen.routeName: (_) => RegisterScreen(),
-            HomeScreen.routeName: (_) => HomeScreen(),
-            OnboardingScreen.routeName: (_) => OnboardingScreen(),
-            CreateEvent.routeName: (_) => CreateEvent(),
-          },
-          home: snapshot.hasData == true ? HomeScreen() : OnboardingScreen(),
-          theme: AppTheme.lightMode,
-          darkTheme: AppTheme.darkMode,
-          themeMode: ThemeMode.light,
-        );
       },
->>>>>>> development
     );
   }
 
