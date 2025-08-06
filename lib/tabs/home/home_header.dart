@@ -1,6 +1,8 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/models/category_Model.dart';
+import 'package:evently_app/models/user_model.dart';
 import 'package:evently_app/providers/event_provider.dart';
+import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,7 @@ class _HomeHeaderState extends State<HomeHeader> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    UserModel user = Provider.of<Userprovider>(context).currentUser!;
     EventProvider eventProvider = Provider.of<EventProvider>(context);
 
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -31,8 +34,8 @@ class _HomeHeaderState extends State<HomeHeader> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Welcome Back', style: textTheme.titleSmall),
-            Text('Omar Khaled', style: textTheme.headlineSmall),
+            Text('Welcome Back ', style: textTheme.titleSmall),
+            Text(user.name, style: textTheme.headlineSmall),
             SizedBox(height: 16),
             DefaultTabController(
               length: CategoryModel.categories.length + 1,
