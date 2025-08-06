@@ -1,9 +1,28 @@
+import 'package:evently_app/providers/event_provider.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class LoveTab extends StatelessWidget {
+class LoveTab extends StatefulWidget {
+  @override
+  State<LoveTab> createState() => _LoveTabState();
+}
+
+class _LoveTabState extends State<LoveTab> {
+  late EventProvider eventProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => eventProvider.favouriteFilterEvents([]),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    eventProvider = Provider.of<EventProvider>(context);
+
     return SafeArea(
       child: Column(
         children: [
