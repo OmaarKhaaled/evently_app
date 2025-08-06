@@ -1,8 +1,10 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/login_screen.dart';
+import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/tabs/profile/profile_header.dart';
 import 'package:evently_app/widget/firebase_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTab extends StatelessWidget {
   @override
@@ -83,6 +85,11 @@ class ProfileTab extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     FirebaseService.logOut().then((_) {
+                      Provider.of<Userprovider>(
+                        context,
+                        listen: false,
+                      ).updateCurrentUser(null);
+
                       Navigator.of(
                         context,
                       ).pushReplacementNamed(LoginScreen.routeName);

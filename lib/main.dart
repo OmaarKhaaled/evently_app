@@ -4,6 +4,7 @@ import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/onboarding_screen.dart';
 import 'package:evently_app/providers/event_provider.dart';
+import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/widget/create_event.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,13 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    ChangeNotifierProvider(create: (_) => EventProvider()..getEvents(), 
-     child: EventlyApp()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Userprovider()),
+        ChangeNotifierProvider(create: (_) => EventProvider()..getEvents()),
+      ],
+      child: EventlyApp(),
+    ),
   );
 }
 

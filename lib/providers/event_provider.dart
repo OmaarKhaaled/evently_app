@@ -1,5 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
-
 import 'package:evently_app/models/category_Model.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/widget/firebase_service.dart';
