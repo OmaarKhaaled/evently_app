@@ -1,15 +1,18 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/models/event_model.dart';
-import 'package:evently_app/widget/firebase_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:evently_app/providers/event_provider.dart';
+import 'package:evently_app/providers/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EventItem extends StatelessWidget {
   EventModel event;
   EventItem({required this.event});
   @override
   Widget build(BuildContext context) {
+    Userprovider userprovider = Provider.of(context);
+    bool isFavorite = userprovider.isFavoriteEvent(event.id);
     Size screenSize = MediaQuery.sizeOf(context);
     TextTheme textTheme = Theme.of(context).textTheme;
     return Padding(
@@ -77,9 +80,22 @@ class EventItem extends StatelessWidget {
                     ),
                     SizedBox(width: 8),
                     InkWell(
+                      onTap: () {
+                        if (isFavorite) {
+                          userprovider.removeEventfromFavorite(event.id);
+                          Provider.of<EventProvider>(
+                            listen: false,
+                            context,
+                          ).favouriteFilterEvents(
+                            userprovider.currentUser!.favoriteEventsIds,
+                          );
+                        } else {
+                          userprovider.addEventToFavorite(event.id);
+                        }
+                      },
                       child: Icon(
                         size: 25,
-                        Icons.favorite_rounded,
+                        isFavorite ? Icons.favorite : Icons.favorite_outline,
                         color: AppTheme.primary,
                       ),
                     ),
