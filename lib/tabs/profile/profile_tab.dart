@@ -1,5 +1,6 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/login_screen.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/tabs/profile/profile_header.dart';
 import 'package:evently_app/widget/firebase_service.dart';
@@ -10,6 +11,7 @@ class ProfileTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     List<Language> languages = [
       Language(code: 'en', name: 'English'),
       Language(code: 'ar', name: 'العربية'),
@@ -29,7 +31,9 @@ class ProfileTab extends StatelessWidget {
                 Text(
                   'Language',
                   style: textTheme.titleLarge!.copyWith(
-                    color: AppTheme.black,
+                    color: settingsProvider.isDark
+                        ? AppTheme.white
+                        : AppTheme.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -70,13 +74,19 @@ class ProfileTab extends StatelessWidget {
                     Text(
                       'Dark Theme',
                       style: textTheme.titleLarge!.copyWith(
-                        color: AppTheme.black,
+                        color: settingsProvider.isDark
+                            ? AppTheme.white
+                            : AppTheme.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Switch(
-                      value: true,
-                      onChanged: (value) {},
+                      value: settingsProvider.isDark,
+                      onChanged: (isdark) {
+                        settingsProvider.changeTheme(
+                          theme: isdark ? ThemeMode.dark : ThemeMode.light,
+                        );
+                      },
                       activeTrackColor: AppTheme.primary,
                     ),
                   ],
@@ -85,14 +95,14 @@ class ProfileTab extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     FirebaseService.logOut().then((_) {
-                      Provider.of<Userprovider>(
-                        context,
-                        listen: false,
-                      ).updateCurrentUser(null);
-
                       Navigator.of(
                         context,
-                      ).pushReplacementNamed(LoginScreen.routeName);
+                      ).pushReplacementNamed(LoginScreen.routeName).then((_) {
+                        Provider.of<Userprovider>(
+                          context,
+                          listen: false,
+                        ).updateCurrentUser(null);
+                      });
                     });
                   },
 

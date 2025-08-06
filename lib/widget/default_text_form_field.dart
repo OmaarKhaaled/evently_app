@@ -1,6 +1,8 @@
 import 'package:evently_app/app_theme.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class DefaultTextFormField extends StatefulWidget {
   String hintText;
@@ -28,7 +30,13 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     return TextFormField(
+      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+        color: settingsProvider.isDark ? AppTheme.white : AppTheme.black,
+      ),
+
       controller: widget.controller,
       onChanged: widget.onChanged,
       decoration: InputDecoration(

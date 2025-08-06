@@ -1,15 +1,16 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/models/category_Model.dart';
 import 'package:evently_app/models/event_model.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/tabs/home/tab_item.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
 import 'package:evently_app/widget/firebase_service.dart';
-import 'package:evently_app/widget/ui_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CreateEvent extends StatefulWidget {
   static const String routeName = '/crete-event';
@@ -30,12 +31,18 @@ class _CreateEventState extends State<CreateEvent> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     Size screenSize = MediaQuery.sizeOf(context);
 
     TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text('create Event')),
+      appBar: AppBar(
+        title: Text('create Event'),
+        backgroundColor: settingsProvider.isDark
+            ? AppTheme.backgroundDark
+            : AppTheme.backGroundLight,
+      ),
       body: Column(
         children: [
           Padding(
@@ -62,7 +69,9 @@ class _CreateEventState extends State<CreateEvent> {
                       isSelected:
                           currentIndex ==
                           CategoryModel.categories.indexOf(category),
-                      selectedForeGroundColor: AppTheme.white,
+                      selectedForeGroundColor: settingsProvider.isDark
+                          ? AppTheme.black
+                          : AppTheme.white,
                       unselectedForeGroundColor: AppTheme.primary,
                       selectedBackGroundColor: AppTheme.primary,
                     ),
@@ -89,7 +98,14 @@ class _CreateEventState extends State<CreateEvent> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Title', style: textTheme.titleMedium),
+                  Text(
+                    'Title',
+                    style: textTheme.titleMedium!.copyWith(
+                      color: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.black,
+                    ),
+                  ),
                   SizedBox(height: 8),
                   DefaultTextFormField(
                     hintText: 'Event Title',
@@ -103,7 +119,14 @@ class _CreateEventState extends State<CreateEvent> {
                     },
                   ),
                   SizedBox(height: 16),
-                  Text('description', style: textTheme.titleMedium),
+                  Text(
+                    'description',
+                    style: textTheme.titleMedium!.copyWith(
+                      color: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.black,
+                    ),
+                  ),
                   SizedBox(height: 8),
                   DefaultTextFormField(
                     hintText: 'Event description',
@@ -118,9 +141,24 @@ class _CreateEventState extends State<CreateEvent> {
                   SizedBox(height: 16),
                   Row(
                     children: [
-                      SvgPicture.asset('assets/icons/date.svg'),
+                      SvgPicture.asset(
+                        'assets/icons/date.svg',
+                        colorFilter: ColorFilter.mode(
+                          settingsProvider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                       SizedBox(width: 8),
-                      Text('Event Date', style: textTheme.titleMedium),
+                      Text(
+                        'Event Date',
+                        style: textTheme.titleMedium!.copyWith(
+                          color: settingsProvider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black,
+                        ),
+                      ),
                       Spacer(),
                       InkWell(
                         onTap: () async {
@@ -149,9 +187,24 @@ class _CreateEventState extends State<CreateEvent> {
                   SizedBox(height: 16),
                   Row(
                     children: [
-                      SvgPicture.asset('assets/icons/time.svg'),
+                      SvgPicture.asset(
+                        'assets/icons/time.svg',
+                        colorFilter: ColorFilter.mode(
+                          settingsProvider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                       SizedBox(width: 8),
-                      Text('Event Time', style: textTheme.titleMedium),
+                      Text(
+                        'Event Time',
+                        style: textTheme.titleMedium!.copyWith(
+                          color: settingsProvider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black,
+                        ),
+                      ),
                       Spacer(),
                       InkWell(
                         onTap: () async {
@@ -207,7 +260,7 @@ class _CreateEventState extends State<CreateEvent> {
         dateTime: dateTime,
         description: descriptionEditingController.text,
       );
-      FirebaseService.createEvent(event).then((_) { 
+      FirebaseService.createEvent(event).then((_) {
         Navigator.of(context).pop();
       });
     }

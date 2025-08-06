@@ -1,5 +1,7 @@
+import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/home_screen.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
@@ -22,6 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -70,7 +74,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Text(
                     'don\'t Have An Account ?',
-                    style: textTheme.titleMedium,
+                    style: textTheme.titleMedium!.copyWith(
+                      color: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.black,
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
@@ -96,7 +104,10 @@ class _LoginScreenState extends State<LoginScreen> {
             password: passwordController.text,
           )
           .then((user) {
-            Provider.of<Userprovider>(context,listen: false).updateCurrentUser(user);
+            Provider.of<Userprovider>(
+              context,
+              listen: false,
+            ).updateCurrentUser(user);
             Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
           })
           .catchError((error) {

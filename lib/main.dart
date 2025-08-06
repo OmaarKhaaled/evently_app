@@ -4,6 +4,7 @@ import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/onboarding_screen.dart';
 import 'package:evently_app/providers/event_provider.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/widget/create_event.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,6 +20,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => Userprovider()),
         ChangeNotifierProvider(create: (_) => EventProvider()..getEvents()),
+        ChangeNotifierProvider(create: (_) => SettingsProvider()),
       ],
       child: EventlyApp(),
     ),
@@ -28,6 +30,7 @@ Future<void> main() async {
 class EventlyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return FutureBuilder<bool>(
       future: hasSeenOnBoarding(),
       builder: (context, snapshot) {
@@ -54,7 +57,7 @@ class EventlyApp extends StatelessWidget {
             },
             theme: AppTheme.lightMode,
             darkTheme: AppTheme.darkMode,
-            themeMode: ThemeMode.light,
+            themeMode: settingsProvider.themeMode,
             home: seenOnboarding ? LoginScreen() : OnboardingScreen(),
           );
         }

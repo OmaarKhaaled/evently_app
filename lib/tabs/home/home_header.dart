@@ -2,6 +2,7 @@ import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/models/category_Model.dart';
 import 'package:evently_app/models/user_model.dart';
 import 'package:evently_app/providers/event_provider.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _HomeHeaderState extends State<HomeHeader> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of(context);
     UserModel user = Provider.of<Userprovider>(context).currentUser!;
     EventProvider eventProvider = Provider.of<EventProvider>(context);
 
@@ -24,7 +26,9 @@ class _HomeHeaderState extends State<HomeHeader> {
     return Container(
       padding: EdgeInsets.only(left: 16, bottom: 16),
       decoration: BoxDecoration(
-        color: AppTheme.primary,
+        color: settingsProvider.isDark
+            ? AppTheme.backgroundDark
+            : AppTheme.primary,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(24),
           bottomRight: Radius.circular(24),
@@ -34,7 +38,7 @@ class _HomeHeaderState extends State<HomeHeader> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Welcome Back ', style: textTheme.titleSmall),
+            Text('Welcome Back 😍', style: textTheme.titleSmall),
             Text(user.name, style: textTheme.headlineSmall),
             SizedBox(height: 16),
             DefaultTabController(
@@ -59,9 +63,13 @@ class _HomeHeaderState extends State<HomeHeader> {
                     icon: Icons.ac_unit_outlined,
                     label: 'All',
                     isSelected: currentIndex == 0,
-                    selectedForeGroundColor: AppTheme.primary,
+                    selectedForeGroundColor: settingsProvider.isDark
+                        ? AppTheme.white
+                        : AppTheme.primary,
                     unselectedForeGroundColor: AppTheme.white,
-                    selectedBackGroundColor: AppTheme.white,
+                    selectedBackGroundColor: settingsProvider.isDark
+                        ? AppTheme.primary
+                        : AppTheme.white,
                   ),
                   ...CategoryModel.categories.map(
                     (category) => TabItem(
@@ -70,9 +78,13 @@ class _HomeHeaderState extends State<HomeHeader> {
                       isSelected:
                           currentIndex ==
                           CategoryModel.categories.indexOf(category) + 1,
-                      selectedForeGroundColor: AppTheme.primary,
+                      selectedForeGroundColor: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.primary,
                       unselectedForeGroundColor: AppTheme.white,
-                      selectedBackGroundColor: AppTheme.white,
+                      selectedBackGroundColor: settingsProvider.isDark
+                          ? AppTheme.primary
+                          : AppTheme.white,
                     ),
                   ),
                 ],

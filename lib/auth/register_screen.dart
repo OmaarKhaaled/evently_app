@@ -1,5 +1,7 @@
+import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/login_screen.dart';
 import 'package:evently_app/home_screen.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
 import 'package:evently_app/widget/default_text_form_field.dart';
@@ -24,6 +26,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -85,7 +89,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Already have account?', style: textTheme.titleMedium),
+                  Text(
+                    'Already have account?',
+                    style: textTheme.titleMedium!.copyWith(
+                      color: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.black,
+                    ),
+                  ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(
