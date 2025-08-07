@@ -53,6 +53,5 @@ class _LoveTabState extends State<LoveTab> {
         ],
       ),
     );
-    ;
   }
 }
