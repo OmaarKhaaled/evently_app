@@ -1,4 +1,5 @@
 import 'package:evently_app/app_theme.dart';
+import 'package:evently_app/edit_event.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,13 @@ class EventDetails extends StatelessWidget {
         ),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                EditEvent.routeName,
+                arguments: event,
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.only(right: 12.0),
               child: Icon(Icons.edit),
@@ -128,7 +135,7 @@ class EventDetails extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(12.0),
                             child: Icon(
                               Icons.my_location,
                               color: AppTheme.white,
