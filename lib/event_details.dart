@@ -47,7 +47,7 @@ class EventDetails extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: SafeArea(
@@ -89,9 +89,9 @@ class EventDetails extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: SvgPicture.asset(
+                                  'assets/icons/date.svg',
                                   width: 20,
                                   height: 26,
-                                  'assets/icons/date.svg',
                                   colorFilter: ColorFilter.mode(
                                     AppTheme.white,
                                     BlendMode.srcIn,
@@ -174,37 +174,9 @@ class EventDetails extends StatelessWidget {
                           ),
                         ],
                       ),
-<<<<<<< HEAD
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppTheme.primary),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppTheme.primary,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Icon(
-                              Icons.my_location,
-                              color: AppTheme.white,
-                              size: 25,
-                            ),
-                          ),
-                        ),
-=======
                     ),
                     SizedBox(height: 16),
+                    // The map image (with errorBuilder)
                     Image.asset(
                       'assets/images/map.png',
                       errorBuilder: (context, error, stackTrace) =>
@@ -215,7 +187,6 @@ class EventDetails extends StatelessWidget {
                       'Description',
                       style: textTheme.titleLarge!.copyWith(
                         color: AppTheme.black,
->>>>>>> feature/event-details
                       ),
                     ),
                     SizedBox(height: 8),
