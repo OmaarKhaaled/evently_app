@@ -1,4 +1,5 @@
 import 'package:evently_app/app_theme.dart';
+import 'package:evently_app/edit_event.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,13 @@ class EventDetails extends StatelessWidget {
         ),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                EditEvent.routeName,
+                arguments: event,
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.only(right: 12.0),
               child: Icon(Icons.edit),
@@ -167,6 +174,7 @@ class EventDetails extends StatelessWidget {
                           ),
                         ],
                       ),
+<<<<<<< HEAD
                     ),
                     SizedBox(height: 16),
                     Image.asset(
@@ -179,6 +187,35 @@ class EventDetails extends StatelessWidget {
                       'Description',
                       style: textTheme.titleLarge!.copyWith(
                         color: AppTheme.black,
+=======
+                    ],
+                  ),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppTheme.primary),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppTheme.primary,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Icon(
+                              Icons.my_location,
+                              color: AppTheme.white,
+                              size: 25,
+                            ),
+                          ),
+                        ),
+>>>>>>> feature/edit-event
                       ),
                     ),
                     SizedBox(height: 8),
