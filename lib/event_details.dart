@@ -1,27 +1,31 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/edit_event.dart';
+import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/models/event_model.dart';
-import 'package:evently_app/providers/settings_provider.dart';
+import 'package:evently_app/widget/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class EventDetails extends StatelessWidget {
   static const String routeName = 'eventDetails';
+
   @override
   Widget build(BuildContext context) {
-    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     DateFormat dateFormat = DateFormat('d MMMM yyyy');
     DateFormat timeFormat = DateFormat('hh:mm a');
     TextTheme textTheme = Theme.of(context).textTheme;
+
     final EventModel event =
         ModalRoute.of(context)!.settings.arguments as EventModel;
+
     return Scaffold(
       appBar: AppBar(
+        
         title: Text('Event Details'),
         leading: InkWell(
-          onTap: () => Navigator.pop(context),
+          onTap: () => Navigator.of(context).pushReplacementNamed(HomeScreen.routeName),
           child: Icon(Icons.arrow_back, size: 26),
         ),
         actions: [
@@ -39,6 +43,57 @@ class EventDetails extends StatelessWidget {
             ),
           ),
           InkWell(
+            onTap: () async {
+              bool? confirm = await showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: Text(
+                    'Confirm Delete',
+                    style: textTheme.headlineSmall!.copyWith(
+                      color: AppTheme.black,
+                    ),
+                  ),
+                  content: Text(
+                    'Are you sure you want to delete this event?',
+                    style: textTheme.titleMedium!.copyWith(
+                      color: AppTheme.black,
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      child: Text('Cancel'),
+                      onPressed: () => Navigator.pop(ctx, false),
+                    ),
+                    TextButton(
+                      child: Text(
+                        'Delete',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                    ),
+                  ],
+                ),
+              );
+
+              if (confirm == true) {
+                await FirebaseService.deleteEvent(event.id);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Event deleted successfully',
+                      style: textTheme.titleMedium!.copyWith(
+                        color: AppTheme.white,
+                      ),
+                    ),
+                    backgroundColor: AppTheme.red,
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+                Navigator.of(context).pop();
+              }
+            },
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: Icon(Icons.delete, color: AppTheme.red),
@@ -47,7 +102,7 @@ class EventDetails extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: SafeArea(
@@ -62,6 +117,7 @@ class EventDetails extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16),
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -72,6 +128,7 @@ class EventDetails extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 16),
+
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: AppTheme.primary),
@@ -123,6 +180,7 @@ class EventDetails extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 16),
+
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: AppTheme.primary),
@@ -174,7 +232,6 @@ class EventDetails extends StatelessWidget {
                           ),
                         ],
                       ),
-<<<<<<< HEAD
                     ),
                     SizedBox(height: 16),
                     Image.asset(
@@ -183,39 +240,11 @@ class EventDetails extends StatelessWidget {
                           Icon(Icons.error, color: Colors.red, size: 64),
                     ),
                     SizedBox(height: 16),
+
                     Text(
                       'Description',
                       style: textTheme.titleLarge!.copyWith(
                         color: AppTheme.black,
-=======
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppTheme.primary),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppTheme.primary,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Icon(
-                              Icons.my_location,
-                              color: AppTheme.white,
-                              size: 25,
-                            ),
-                          ),
-                        ),
->>>>>>> feature/edit-event
                       ),
                     ),
                     SizedBox(height: 8),
