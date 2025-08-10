@@ -77,18 +77,28 @@ class FirebaseService {
     DocumentReference<UserModel> userDoc = userCollection.doc(
       FirebaseAuth.instance.currentUser!.uid,
     );
-   return userDoc.update({
+    return userDoc.update({
       'favoriteEventsIds': FieldValue.arrayUnion([eventId]),
     });
   }
 
-    static Future<void> removeEventToFavorites(String eventId) async {
+  static Future<void> removeEventToFavorites(String eventId) async {
     CollectionReference<UserModel> userCollection = getUserCollection();
     DocumentReference<UserModel> userDoc = userCollection.doc(
       FirebaseAuth.instance.currentUser!.uid,
     );
-   return userDoc.update({
+    return userDoc.update({
       'favoriteEventsIds': FieldValue.arrayRemove([eventId]),
     });
+  }
+
+  static Future<void> updateEvent(EventModel event) {
+    CollectionReference<EventModel> eventCollection = getEventCollection();
+
+    if (event.id.isEmpty) {
+      return Future.error("Event id is null or empty, cannot update event");
+    }
+
+    return eventCollection.doc(event.id).set(event, SetOptions(merge: true));
   }
 }
