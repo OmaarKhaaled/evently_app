@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/models/user_model.dart';
@@ -101,4 +99,10 @@ class FirebaseService {
 
     return eventCollection.doc(event.id).set(event, SetOptions(merge: true));
   }
+
+  static Future<void> deleteEvent(String eventId) async {
+  CollectionReference<EventModel> eventCollection = getEventCollection();
+  await eventCollection.doc(eventId).delete();
+}
+
 }

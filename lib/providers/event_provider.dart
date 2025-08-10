@@ -31,4 +31,9 @@ class EventProvider with ChangeNotifier {
     ).toList();
     notifyListeners();
   }
+
+  Future<void> fetchEvents() async {
+    displayedEvents = await FirebaseService.getEvents();
+    notifyListeners();
+  }
 }
