@@ -28,46 +28,6 @@ class ProfileTab extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Language',
-                  style: textTheme.titleLarge!.copyWith(
-                    color: settingsProvider.isDark
-                        ? AppTheme.white
-                        : AppTheme.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppTheme.primary),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: DropdownButton(
-                    value: 'en',
-                    items: languages
-                        .map(
-                          (language) => DropdownMenuItem(
-                            value: language.code,
-                            child: Text(
-                              language.name,
-                              style: textTheme.titleLarge!.copyWith(
-                                color: AppTheme.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {},
-                    borderRadius: BorderRadius.circular(16),
-                    underline: SizedBox(),
-                    iconEnabledColor: AppTheme.primary,
-                    isExpanded: true,
-                  ),
-                ),
-                SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -88,6 +48,52 @@ class ProfileTab extends StatelessWidget {
                         );
                       },
                       activeTrackColor: AppTheme.primary,
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 16),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children: [
+                    Text(
+                      'Language',
+                      style: textTheme.titleLarge!.copyWith(
+                        color: settingsProvider.isDark
+                            ? AppTheme.white
+                            : AppTheme.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppTheme.primary),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: DropdownButton(
+                        value: 'en',
+                        items: languages
+                            .map(
+                              (language) => DropdownMenuItem(
+                                value: language.code,
+                                child: Text(
+                                  language.name,
+                                  style: textTheme.titleLarge!.copyWith(
+                                    color: AppTheme.primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {},
+                        borderRadius: BorderRadius.circular(16),
+                        underline: SizedBox(),
+                        iconEnabledColor: AppTheme.primary,
+                      ),
                     ),
                   ],
                 ),
