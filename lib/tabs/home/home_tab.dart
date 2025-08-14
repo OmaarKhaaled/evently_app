@@ -15,7 +15,7 @@ class _HomeTabState extends State<HomeTab> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<EventProvider>(context, listen: false).fetchEvents();
+      Provider.of<EventProvider>(context, listen: false).getEvents();
     });
   }
 
@@ -42,7 +42,7 @@ class _HomeTabState extends State<HomeTab> {
                     Provider.of<EventProvider>(
                       context,
                       listen: true,
-                    ).fetchEvents();
+                    ).getEvents();
                   }
                 },
                 child: EventItem(event: event),

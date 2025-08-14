@@ -4,36 +4,31 @@ import 'package:evently_app/widget/firebase_service.dart';
 import 'package:flutter/material.dart';
 
 class EventProvider with ChangeNotifier {
-  List<EventModel> AllEvents = [];
+  List<EventModel> allEvents = [];
   List<EventModel> displayedEvents = [];
   List<EventModel> favoriteEvents = [];
 
   Future<void> getEvents() async {
-    AllEvents = await FirebaseService.getEvents();
-    displayedEvents = AllEvents;
+    allEvents = await FirebaseService.getEvents();
+    displayedEvents = allEvents;
     notifyListeners();
   }
 
   void filterEvents(CategoryModel? category) {
     if (category == null) {
-      displayedEvents = AllEvents;
+      displayedEvents = allEvents;
     } else {
-      displayedEvents = AllEvents.where(
-        (event) => event.category == category,
-      ).toList();
+      displayedEvents = allEvents
+          .where((event) => event.category == category)
+          .toList();
     }
     notifyListeners();
   }
 
   void favouriteFilterEvents(List<String> favouriteIds) {
-    favoriteEvents = AllEvents.where(
-      (event) => favouriteIds.contains(event.id),
-    ).toList();
-    notifyListeners();
-  }
-
-  Future<void> fetchEvents() async {
-    displayedEvents = await FirebaseService.getEvents();
+    favoriteEvents = allEvents
+        .where((event) => favouriteIds.contains(event.id))
+        .toList();
     notifyListeners();
   }
 }

@@ -2,30 +2,32 @@ import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/edit_event.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/models/event_model.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/widget/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EventDetails extends StatelessWidget {
   static const String routeName = 'eventDetails';
 
   @override
   Widget build(BuildContext context) {
-
     DateFormat dateFormat = DateFormat('d MMMM yyyy');
     DateFormat timeFormat = DateFormat('hh:mm a');
     TextTheme textTheme = Theme.of(context).textTheme;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
 
     final EventModel event =
         ModalRoute.of(context)!.settings.arguments as EventModel;
 
     return Scaffold(
       appBar: AppBar(
-        
         title: Text('Event Details'),
         leading: InkWell(
-          onTap: () => Navigator.of(context).pushReplacementNamed(HomeScreen.routeName),
+          onTap: () =>
+              Navigator.of(context).pushReplacementNamed(HomeScreen.routeName),
           child: Icon(Icons.arrow_back, size: 26),
         ),
         actions: [
@@ -150,7 +152,9 @@ class EventDetails extends StatelessWidget {
                                   width: 20,
                                   height: 26,
                                   colorFilter: ColorFilter.mode(
-                                    AppTheme.white,
+                                    settingsProvider.isDark
+                                        ? AppTheme.black
+                                        : AppTheme.white,
                                     BlendMode.srcIn,
                                   ),
                                 ),
@@ -171,7 +175,9 @@ class EventDetails extends StatelessWidget {
                               Text(
                                 timeFormat.format(event.dateTime),
                                 style: textTheme.titleMedium!.copyWith(
-                                  color: AppTheme.black,
+                                  color: settingsProvider.isDark
+                                      ? AppTheme.white
+                                      : AppTheme.black,
                                 ),
                               ),
                             ],
@@ -199,7 +205,9 @@ class EventDetails extends StatelessWidget {
                                 padding: const EdgeInsets.all(12.0),
                                 child: Icon(
                                   Icons.my_location,
-                                  color: AppTheme.white,
+                                  color: settingsProvider.isDark
+                                      ? AppTheme.black
+                                      : AppTheme.white,
                                   size: 25,
                                 ),
                               ),
@@ -234,7 +242,6 @@ class EventDetails extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 16),
-                    // The map image (with errorBuilder)
                     Image.asset(
                       'assets/images/map.png',
                       errorBuilder: (context, error, stackTrace) =>
@@ -245,11 +252,20 @@ class EventDetails extends StatelessWidget {
                     Text(
                       'Description',
                       style: textTheme.titleLarge!.copyWith(
-                        color: AppTheme.black,
+                        color: settingsProvider.isDark
+                            ? AppTheme.white
+                            : AppTheme.black,
                       ),
                     ),
                     SizedBox(height: 8),
-                    Text(event.description, style: textTheme.titleMedium),
+                    Text(
+                      event.description,
+                      style: textTheme.titleMedium!.copyWith(
+                        color: settingsProvider.isDark
+                            ? AppTheme.white
+                            : AppTheme.black,
+                      ),
+                    ),
                   ],
                 ),
               ],

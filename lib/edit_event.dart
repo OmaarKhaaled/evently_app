@@ -94,7 +94,9 @@ class _EditEventState extends State<EditEvent> {
                         isSelected:
                             currentIndex ==
                             CategoryModel.categories.indexOf(category),
-                        selectedForeGroundColor: AppTheme.white,
+                        selectedForeGroundColor: settingsProvider.isDark
+                            ? AppTheme.black
+                            : AppTheme.white,
                         unselectedForeGroundColor: AppTheme.primary,
                         selectedBackGroundColor: AppTheme.primary,
                       ),
@@ -264,7 +266,14 @@ class _EditEventState extends State<EditEvent> {
                       ],
                     ),
                     SizedBox(height: 16),
-                    Text('Location', style: textTheme.titleMedium),
+                    Text(
+                      'Location',
+                      style: textTheme.titleMedium!.copyWith(
+                        color: settingsProvider.isDark
+                            ? AppTheme.white
+                            : AppTheme.black,
+                      ),
+                    ),
                     SizedBox(height: 16),
                     Container(
                       decoration: BoxDecoration(

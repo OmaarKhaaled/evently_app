@@ -134,7 +134,7 @@ class AppTheme {
     ),
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: TextStyle(
-        color: white,
+        color: grey,
         fontWeight: FontWeight.w500,
         fontSize: 16,
       ),
