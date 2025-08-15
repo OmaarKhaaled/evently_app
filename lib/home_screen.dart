@@ -1,4 +1,5 @@
 import 'package:evently_app/app_theme.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/nav_bar_icon.dart';
 import 'package:evently_app/tabs/home/home_tab.dart';
 import 'package:evently_app/tabs/love/love_tab.dart';
@@ -42,22 +43,22 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
               icon: NavBarIcon(IconName: 'home'),
               activeIcon: NavBarIcon(IconName: 'home_active'),
-              label: 'Home',
+              label: AppLocalizations.of(context)?.home ?? 'Home',
             ),
             BottomNavigationBarItem(
               icon: NavBarIcon(IconName: 'map'),
               activeIcon: NavBarIcon(IconName: 'map_active'),
-              label: 'Map',
+              label: AppLocalizations.of(context)?.map ?? 'Map',
             ),
             BottomNavigationBarItem(
               icon: NavBarIcon(IconName: 'love'),
               activeIcon: NavBarIcon(IconName: 'love_active'),
-              label: 'Love',
+              label: AppLocalizations.of(context)?.love ?? 'Love',
             ),
             BottomNavigationBarItem(
               icon: NavBarIcon(IconName: 'profile'),
               activeIcon: NavBarIcon(IconName: 'profile_active'),
-              label: 'Profile',
+              label: AppLocalizations.of(context)?.profile ?? 'Profile',
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/edit_event.dart';
 import 'package:evently_app/event_details.dart';
 import 'package:evently_app/home_screen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/onboarding_screen.dart';
 import 'package:evently_app/providers/event_provider.dart';
 import 'package:evently_app/providers/settings_provider.dart';
@@ -13,6 +14,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,12 +60,15 @@ class EventlyApp extends StatelessWidget {
               OnboardingScreen.routeName: (_) => OnboardingScreen(),
               CreateEvent.routeName: (_) => CreateEvent(),
               EventDetails.routeName: (_) => EventDetails(),
-              EditEvent.routeName :(_) => EditEvent() ,
+              EditEvent.routeName: (_) => EditEvent(),
             },
             theme: AppTheme.lightMode,
             darkTheme: AppTheme.darkMode,
             themeMode: settingsProvider.themeMode,
             home: seenOnboarding ? LoginScreen() : OnboardingScreen(),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: Locale(settingsProvider.languageCode),
           );
         }
       },

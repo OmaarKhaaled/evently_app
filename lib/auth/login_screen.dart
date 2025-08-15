@@ -1,6 +1,7 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/home_screen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
@@ -43,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 24),
               DefaultTextFormField(
-                hintText: 'Email',
+                hintText: AppLocalizations.of(context)!.email,
                 controller: emailController,
                 preFixIconImageName: 'email',
                 validator: (value) {
@@ -55,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 16),
               DefaultTextFormField(
-                hintText: 'password',
+                hintText: AppLocalizations.of(context)!.password,
                 controller: passwordController,
                 preFixIconImageName: 'password',
                 validator: (value) {
@@ -67,13 +68,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 isPassword: true,
               ),
               SizedBox(height: 24),
-              DefaultElevatedButton(label: 'Login', onPressed: login),
+              DefaultElevatedButton(
+                label: AppLocalizations.of(context)!.login,
+                onPressed: login,
+              ),
               SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'don\'t Have An Account ?',
+                    AppLocalizations.of(context)!.dont_Have_An_Account,
                     style: textTheme.titleMedium!.copyWith(
                       color: settingsProvider.isDark
                           ? AppTheme.white
@@ -86,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         context,
                       ).pushReplacementNamed(RegisterScreen.routeName);
                     },
-                    child: Text('Create An Account'),
+                    child: Text(AppLocalizations.of(context)!.createAccount),
                   ),
                 ],
               ),
