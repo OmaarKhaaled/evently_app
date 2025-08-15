@@ -1,5 +1,6 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/login_screen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/tabs/profile/profile_header.dart';
@@ -7,7 +8,12 @@ import 'package:evently_app/widget/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProfileTab extends StatelessWidget {
+class ProfileTab extends StatefulWidget {
+  @override
+  State<ProfileTab> createState() => _ProfileTabState();
+}
+
+class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -16,7 +22,6 @@ class ProfileTab extends StatelessWidget {
       Language(code: 'en', name: 'English'),
       Language(code: 'ar', name: 'العربية'),
     ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +37,8 @@ class ProfileTab extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Dark Theme',
+                      AppLocalizations.of(context)?.dark_theme ?? 'Dark Theme',
+                      
                       style: textTheme.titleLarge!.copyWith(
                         color: settingsProvider.isDark
                             ? AppTheme.white
@@ -51,15 +57,14 @@ class ProfileTab extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 SizedBox(height: 16),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                   children: [
                     Text(
-                      'Language',
+                      AppLocalizations.of(context)?.language ?? 'Language',
+
                       style: textTheme.titleLarge!.copyWith(
                         color: settingsProvider.isDark
                             ? AppTheme.white
@@ -74,7 +79,7 @@ class ProfileTab extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: DropdownButton(
-                        value: 'en',
+                        value: settingsProvider.languageCode,
                         items: languages
                             .map(
                               (language) => DropdownMenuItem(
@@ -89,7 +94,12 @@ class ProfileTab extends StatelessWidget {
                               ),
                             )
                             .toList(),
-                        onChanged: (value) {},
+                        onChanged: (languageCode) {
+                          if (languageCode == null) return;
+                          settingsProvider.changeLanguage(
+                            language: languageCode,
+                          );
+                        },
                         borderRadius: BorderRadius.circular(16),
                         underline: SizedBox(),
                         iconEnabledColor: AppTheme.primary,
@@ -123,7 +133,11 @@ class ProfileTab extends StatelessWidget {
                       children: [
                         Icon(Icons.logout, size: 24, color: AppTheme.white),
                         SizedBox(width: 8),
-                        Text('Logout', style: textTheme.titleLarge),
+
+                        Text(
+                          AppLocalizations.of(context)?.logout ?? 'Logout',
+                          style: textTheme.titleLarge,
+                        ),
                       ],
                     ),
                   ),

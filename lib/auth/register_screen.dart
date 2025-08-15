@@ -1,6 +1,7 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/login_screen.dart';
 import 'package:evently_app/home_screen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/userProvider.dart';
 import 'package:evently_app/widget/default_elevated_button.dart';
@@ -45,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 24),
               DefaultTextFormField(
-                hintText: 'Name',
+                hintText: AppLocalizations.of(context)!.name,
                 controller: nameController,
                 preFixIconImageName: 'person',
                 validator: (value) {
@@ -57,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 24),
               DefaultTextFormField(
-                hintText: 'Email',
+                hintText: AppLocalizations.of(context)!.password,
                 controller: emailController,
                 preFixIconImageName: 'email',
                 validator: (value) {
@@ -69,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 16),
               DefaultTextFormField(
-                hintText: 'password',
+                hintText: AppLocalizations.of(context)!.password,
                 controller: passwordController,
                 preFixIconImageName: 'password',
                 validator: (value) {
@@ -82,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 24),
               DefaultElevatedButton(
-                label: 'Create Account',
+                label: AppLocalizations.of(context)!.createAccount,
                 onPressed: register,
               ),
               SizedBox(height: 24),
@@ -90,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already have account?',
+                    AppLocalizations.of(context)!.already_have_account,
                     style: textTheme.titleMedium!.copyWith(
                       color: settingsProvider.isDark
                           ? AppTheme.white
@@ -103,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         context,
                       ).pushReplacementNamed(LoginScreen.routeName);
                     },
-                    child: Text('Login'),
+                    child: Text(AppLocalizations.of(context)!.login),
                   ),
                 ],
               ),

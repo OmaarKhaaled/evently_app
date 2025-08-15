@@ -1,0 +1,16 @@
+{
+    "login" : "تسجيل دخول" ,
+    "createAccount" : "انشاء حساب" ,
+    "logout" : "تسجيل خروج" ,
+    "dont_Have_An_Account" : " لا تمتلك حساب ؟" ,
+    "email" : "الايميل",
+    "password":"الرقم السرى",
+    "name" : "الاسم" ,
+    "already_have_account" :"تمتلك حساب بالفعل",
+    "dark_theme" :"الوضع الداكن",
+    "language" : "اللغة",
+    "profile" :"الحساب" ,
+    "love" : "المفضلة" ,
+    "map":"الخريطة",
+    "home":"الصفحة الرئيسية"
+}

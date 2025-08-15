@@ -1,0 +1,16 @@
+{
+   "login" : "Login" ,
+   "createAccount" : "Create Account" ,
+   "logout" : "Logout" ,
+   "dont_Have_An_Account" : "dont Have An Account ?" ,
+   "email" : "email",
+   "password":"password",
+   "name" : "name" ,
+   "already_have_account" :"already have account",
+   "dark_theme" :"dark Theme",
+   "language" : "Language",
+   "profile" :"Profile" ,
+   "love" : "Love" ,
+   "map":"Map",
+   "home":"Home"
+}
