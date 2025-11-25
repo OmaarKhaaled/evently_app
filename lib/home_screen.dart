@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
 
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -41,23 +43,23 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           items: [
             BottomNavigationBarItem(
-              icon: NavBarIcon(IconName: 'home'),
-              activeIcon: NavBarIcon(IconName: 'home_active'),
+              icon: NavBarIcon(iconName: 'home'),
+              activeIcon: NavBarIcon(iconName: 'home_active'),
               label: AppLocalizations.of(context)?.home ?? 'Home',
             ),
             BottomNavigationBarItem(
-              icon: NavBarIcon(IconName: 'map'),
-              activeIcon: NavBarIcon(IconName: 'map_active'),
+              icon: NavBarIcon(iconName: 'map'),
+              activeIcon: NavBarIcon(iconName: 'map_active'),
               label: AppLocalizations.of(context)?.map ?? 'Map',
             ),
             BottomNavigationBarItem(
-              icon: NavBarIcon(IconName: 'love'),
-              activeIcon: NavBarIcon(IconName: 'love_active'),
+              icon: NavBarIcon(iconName: 'love'),
+              activeIcon: NavBarIcon(iconName: 'love_active'),
               label: AppLocalizations.of(context)?.love ?? 'Love',
             ),
             BottomNavigationBarItem(
-              icon: NavBarIcon(IconName: 'profile'),
-              activeIcon: NavBarIcon(IconName: 'profile_active'),
+              icon: NavBarIcon(iconName: 'profile'),
+              activeIcon: NavBarIcon(iconName: 'profile_active'),
               label: AppLocalizations.of(context)?.profile ?? 'Profile',
             ),
           ],

@@ -15,6 +15,8 @@ import 'package:provider/provider.dart';
 class CreateEvent extends StatefulWidget {
   static const String routeName = '/crete-event';
 
+  const CreateEvent({super.key});
+
   @override
   State<CreateEvent> createState() => _CreateEventState();
 }
@@ -254,7 +256,7 @@ class _CreateEventState extends State<CreateEvent> {
         selectedTime!.minute,
       );
       EventModel event = EventModel(
-        Userid: FirebaseAuth.instance.currentUser!.uid,
+        userid: FirebaseAuth.instance.currentUser!.uid,
         category: selectedCategory,
         title: titleEditingController.text,
         dateTime: dateTime,

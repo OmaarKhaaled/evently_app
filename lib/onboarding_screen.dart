@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class OnboardingScreen extends StatefulWidget {
   static const routeName = '/onboarding';
 
+  const OnboardingScreen({super.key});
+
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }

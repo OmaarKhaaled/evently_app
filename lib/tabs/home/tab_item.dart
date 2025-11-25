@@ -9,7 +9,7 @@ class TabItem extends StatelessWidget {
   Color unselectedForeGroundColor;
   Color selectedBackGroundColor;
 
-  TabItem({
+  TabItem({super.key, 
     required this.icon,
     required this.label,
     required this.isSelected,

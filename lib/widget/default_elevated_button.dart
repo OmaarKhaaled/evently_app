@@ -5,7 +5,7 @@ class DefaultElevatedButton extends StatelessWidget {
   String label;
   VoidCallback onPressed;
 
-  DefaultElevatedButton({required this.label, required this.onPressed});
+  DefaultElevatedButton({super.key, required this.label, required this.onPressed});
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;

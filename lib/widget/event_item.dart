@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class EventItem extends StatelessWidget {
   EventModel event;
-  EventItem({required this.event});
+  EventItem({super.key, required this.event});
   @override
   Widget build(BuildContext context) {
     Userprovider userprovider = Provider.of<Userprovider>(context);

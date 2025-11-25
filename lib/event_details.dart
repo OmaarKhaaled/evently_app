@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 class EventDetails extends StatelessWidget {
   static const String routeName = 'eventDetails';
 
+  const EventDetails({super.key});
+
   @override
   Widget build(BuildContext context) {
     DateFormat dateFormat = DateFormat('d MMMM yyyy');

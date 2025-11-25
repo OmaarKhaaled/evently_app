@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomeTab extends StatefulWidget {
+  const HomeTab({super.key});
+
   @override
   State<HomeTab> createState() => _HomeTabState();
 }

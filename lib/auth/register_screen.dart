@@ -15,6 +15,8 @@ import 'package:provider/provider.dart';
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/register';
 
+  const RegisterScreen({super.key});
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }

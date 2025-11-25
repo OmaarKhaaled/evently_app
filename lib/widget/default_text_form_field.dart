@@ -12,7 +12,7 @@ class DefaultTextFormField extends StatefulWidget {
   String? Function(String?)? validator;
   bool isPassword;
 
-  DefaultTextFormField({
+  DefaultTextFormField({super.key, 
     required this.hintText,
     this.controller,
     this.onChanged,

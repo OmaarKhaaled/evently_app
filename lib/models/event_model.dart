@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/models/category_Model.dart';
 
 class EventModel {
-  String Userid;
+  String userid;
   String id;
   String title;
   String description;
@@ -11,7 +11,7 @@ class EventModel {
 
   EventModel({
     this.id = '',
-    required this.Userid,
+    required this.userid,
     required this.category,
     required this.title,
     required this.dateTime,
@@ -21,7 +21,7 @@ class EventModel {
   EventModel.fromJson(Map<String, dynamic> json)
     : this(
         id: json['id'],
-        Userid: json['userId'],
+        userid: json['userId'],
         title: json['title'],
         category: CategoryModel.categories.firstWhere(
           (category) => category.id == json['categoryID'],
@@ -32,7 +32,7 @@ class EventModel {
 
   Map<String, dynamic> toJson() => {
     'id': id,
-    'userId' : Userid,
+    'userId': userid,
     'title': title,
     'description': description,
     'categoryID': category.id,

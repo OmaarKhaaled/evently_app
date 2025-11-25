@@ -15,6 +15,8 @@ import 'package:provider/provider.dart';
 class EditEvent extends StatefulWidget {
   static const String routeName = '/editEvent';
 
+  const EditEvent({super.key});
+
   @override
   State<EditEvent> createState() => _EditEventState();
 }
@@ -344,7 +346,7 @@ class _EditEventState extends State<EditEvent> {
 
                           EventModel updatedEvent = EventModel(
                             id: event.id,
-                            Userid: event.Userid,
+                            userid: event.userid,
                             category: selectedCategory,
                             title: titleEditingController.text,
                             dateTime: updatedDateTime,

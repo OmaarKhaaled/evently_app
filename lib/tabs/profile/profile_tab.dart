@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProfileTab extends StatefulWidget {
+  const ProfileTab({super.key});
+
   @override
   State<ProfileTab> createState() => _ProfileTabState();
 }
@@ -38,7 +40,6 @@ class _ProfileTabState extends State<ProfileTab> {
                   children: [
                     Text(
                       AppLocalizations.of(context)?.dark_theme ?? 'Dark Theme',
-                      
                       style: textTheme.titleLarge!.copyWith(
                         color: settingsProvider.isDark
                             ? AppTheme.white
